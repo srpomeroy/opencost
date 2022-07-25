@@ -512,12 +512,11 @@ func (ask *AzureServiceKey) IsValid() bool {
 // Loads the azure authentication via configuration or a secret set at install time.
 func (az *Azure) getAzureRateCardAuth(forceReload bool, cp *CustomPricing) (subscriptionID, clientID, clientSecret, tenantID string) {
 	// 1. Check config values first (set from frontend UI)
-	if cp.AzureSubscriptionID != "" && cp.AzureClientID != "" && cp.AzureClientSecret != "" && cp.AzureTenantID != "" {
+	if az.loadedAzureSecret && cp.AzureSubscriptionID != "" && cp.AzureClientID != "" && cp.AzureClientSecret != "" && cp.AzureTenantID != "" {
 		subscriptionID = cp.AzureSubscriptionID
 		clientID = cp.AzureClientID
 		clientSecret = cp.AzureClientSecret
 		tenantID = cp.AzureTenantID
-
 		return
 	}
 
